@@ -2,6 +2,13 @@ require "sinatra"
 require 'sinatra/flash'
 require_relative "authentication.rb"
 require 'stripe'
+require 'twilio-ruby'
+require 'openssl'
+OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
+
+
+account_sid = "AC00a5f5404412b181c55250291a825353" 
+auth_token = "c9c7d2eccbcca4399d13bd354045af0e" 
 
 set :publishable_key, 'pk_test_TYooMQauvdEDq54NiTphI7jx'
 #ENV['PUBLISHABLE_KEY']
@@ -42,12 +49,20 @@ end
 
 get "/dashboard" do
 	authenticate!
-	erb :dashboard
+	if current_user.administrator
+		erb :dashboard
+	else
+		redirect "/"
+	end
 end
 
 get "/upgrade" do
 	authenticate!
-	erb :upgradeForm
+	if current_user.pro
+		redirect "/"
+	else
+		erb :upgradeForm
+	end
 end
 
 get "/aboutUs" do	
@@ -63,7 +78,12 @@ get "/profile" do
 end
 
 get "/saveBirthdate" do
-	erb :saveBirthdateForm
+	authenticate!
+	if current_user.pro
+		erb :saveBirthdateForm
+	else
+		redirect "/"
+	end
 end
 
 get "/gallery" do
@@ -81,6 +101,14 @@ post "/birthdate/create" do
 			b.relationship = params["relationship"]
 			b.user_id = current_user.id			
 			b.save
+
+			number_to_text = "+1" + current_user.phone_number
+			@client = Twilio::REST::Client.new(account_sid, auth_token)
+			message = @client.messages.create(				
+			    body: "You created a birthdate for #{b.first_name} #{b.last_name}! You will be reminded near the date.",
+			    to: "+18329935855", # Replace with your phone number
+			    #to: number_to_text,    
+			    from: "+15753005987")  # Replace with your Twilio number
 			redirect "/profile"
 		end
 	else

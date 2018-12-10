@@ -3,6 +3,7 @@ gem 'sinatra'
 gem 'data_mapper'
 gem 'sinatra-flash'
 gem 'stripe'
+gem 'twilio-ruby'
 group :development do
   gem "sqlite3-ruby"
   gem "dm-sqlite-adapter"

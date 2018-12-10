@@ -17,6 +17,7 @@ class User
     property :created_at, DateTime
     property :pro, Boolean, :default => false
     property :administrator, Boolean, :default => false
+    property :phone_number, String
     #property :roleID, Integer, :default => 0
 
     # def admin?

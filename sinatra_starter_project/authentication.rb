@@ -37,16 +37,17 @@ end
 post "/register" do
 	email = params[:email]
 	password = params[:password]
+	phoneNumber = params[:phone]
 
 	u = User.new
 	u.email = email.downcase
 	u.password =  password
+	u.phone_number = phoneNumber
 	u.save
 
 	session[:user_id] = u.id
 
 	erb :"authentication/successful_signup"
-
 end
 
 #This method will return the user object of the currently signed in user

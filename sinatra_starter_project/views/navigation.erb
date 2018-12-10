@@ -14,10 +14,7 @@
         <%if !current_user.pro && !current_user.administrator %>
           <li class="nav-item">
           <a class="nav-link" href="/upgrade">Upgrade</a>
-          </li>
-           <li class="nav-item">
-          <a class="nav-link" href="/gallery">Cakes Gallery</a>
-                      </li>
+          </li>           
         <% end %>
         <%if current_user.pro %>
           <li class="nav-item">

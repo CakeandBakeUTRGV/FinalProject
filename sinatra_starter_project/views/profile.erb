@@ -1,12 +1,30 @@
-this is where all birthdates saved will show up!!!<br/>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
 
+<h1>My Birthdays</h1>
 
-<% @birthdays.each do |b| %>	
-	<%= b.first_name %><br/>
-	<%= b.last_name %><br/>
-	<%= b.relationship %><br/>
-	<%= b.birthdate %><br/>
-	<br/>
+</body>
+</html>
+
+<% @birthdays.each do |b| %>
+	<table style = "width:100%" border = "1px solid black">
+	  <tr>	  	 
+	    <th>First Name</th>
+	    <th>Last Name</th> 
+	    <th>Birthdate</th>
+	    <th>Relationship</th>
+	  </tr>
+	  <tr>	  	
+	    <td bgcolor = "ffffff"><%= b.first_name %></td>
+	    <td bgcolor = "ffffff"><%= b.last_name %></td> 
+	    <td bgcolor = "ffffff"><%= b.birthdate %></td>
+	    <td bgcolor = "ffffff"><%= b.relationship %></td>
+	  </tr>
+	</table><br/><br/>	
+
 <% end %>
 
 
