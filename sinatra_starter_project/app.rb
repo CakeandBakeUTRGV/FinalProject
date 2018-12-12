@@ -5,7 +5,7 @@ require 'stripe'
 require 'twilio-ruby'
 require 'openssl'
 OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
-
+ 
 
 account_sid = "AC00a5f5404412b181c55250291a825353" 
 auth_token = "c9c7d2eccbcca4399d13bd354045af0e" 
