@@ -54,7 +54,7 @@ get "/dashboard" do
 	else
 		redirect "/"
 	end
-end  
+end
 
 get "/upgrade" do
 	authenticate!
